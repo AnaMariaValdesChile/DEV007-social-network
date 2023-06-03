@@ -16372,7 +16372,7 @@ const currentUserInfo = () => auth.currentUser;
 const provider = new GoogleAuthProvider();
 const loginWithGoogle = () => signInWithPopup(auth, provider);
 const Home = (onNavigate2) => {
-  document.body.style.backgroundImage = "url(Images/fongoHome.png)";
+  document.body.style.backgroundImage = "url(fongoHome.png)";
   const homeDiv = document.createElement("div");
   const header = document.getElementById("header");
   header.style.backgroundImage = "none";
@@ -16397,10 +16397,10 @@ const Home = (onNavigate2) => {
   inputPassword.placeholder = "************";
   inputPassword.id = "inputPassword";
   const hidePassword = document.createElement("img");
-  hidePassword.src = "Images/12.png";
+  hidePassword.src = "12.png";
   hidePassword.setAttribute("class", "hidePasswords");
   const showPassword = document.createElement("img");
-  showPassword.src = "Images/13.png";
+  showPassword.src = "13.png";
   showPassword.setAttribute("class", "showPasswords");
   const labelErrors = document.createElement("label");
   labelErrors.id = "labelErrors";
@@ -16415,10 +16415,10 @@ const Home = (onNavigate2) => {
   const socialNetworksDiv = document.createElement("div");
   socialNetworksDiv.id = "socialNetworksDiv";
   const gmail = document.createElement("img");
-  gmail.src = "Images/8.png";
+  gmail.src = "8.png";
   gmail.setAttribute("class", "gmail");
   const facebook = document.createElement("img");
-  facebook.src = "Images/7.png";
+  facebook.src = "7.png";
   facebook.setAttribute("class", "fb");
   const buttonRegister = document.createElement("button");
   buttonRegister.id = "buttonRegisterHome";
@@ -16501,7 +16501,7 @@ const Home = (onNavigate2) => {
   return homeDiv;
 };
 const Register = (onNavigate2) => {
-  document.body.style.backgroundImage = "url(Images/fondoRegister.png)";
+  document.body.style.backgroundImage = "url(fondoRegister.png)";
   const header = document.getElementById("header");
   header.style.backgroundImage = "none";
   const registerDiv = document.createElement("div");
@@ -16517,8 +16517,8 @@ const Register = (onNavigate2) => {
     <input type="email" class="inputRegister" id="inputMailRegister" placeholder="Correo electr\xF3nico">
     <label class="labelRegister">Contrase\xF1a:</label>
     <input type="password" class="inputRegister" id="inputPasswordRegister" placeholder="*******************">
-    <img src="Images/12.png" class="hidePassword">
-    <img src="Images/13.png" class="showPassword">
+    <img src="12.png" class="hidePassword">
+    <img src="13.png" class="showPassword">
     <label class="labelErrors" id="labelErrors"></label>
     </div>
     <br>`;
@@ -16585,7 +16585,7 @@ const Login = (onNavigate2) => {
   document.body.style.backgroundImage = "none";
   document.body.style.backgroundColor = "#ffffff";
   const header = document.getElementById("header");
-  header.style.backgroundImage = 'url("Images/header.jpg")';
+  header.style.backgroundImage = 'url("header.jpg")';
   const loginDiv = document.createElement("div");
   loginDiv.setAttribute("class", "loginDiv");
   const menu = document.createElement("div");
@@ -16601,7 +16601,7 @@ const Login = (onNavigate2) => {
   buttonMenu.setAttribute("class", "buttonMenu");
   buttonMenu.setAttribute("id", "buttonMenu");
   buttonMenu.innerHTML = `
-  <img src="Images/menu.png" alt="buttonMenu">`;
+  <img src="menu.png" alt="buttonMenu">`;
   const menuOptionsDiv = document.createElement("div");
   menuOptionsDiv.setAttribute("class", "menuOptionsDiv");
   menuOptionsDiv.setAttribute("id", "menuOptionsDiv");
@@ -16616,7 +16616,7 @@ const Login = (onNavigate2) => {
   <div class="containerPublications">Aqu\xED ir\xE1n las publicaciones</div>
   <br>`;
   menuOptionsDiv.innerHTML = `
-        <button class="close" id="close"><img src="Images/9.png" alt="buttonMenu"></button>
+        <button class="close" id="close"><img src="9.png" alt="buttonMenu"></button>
         <a href="" class="optionMenu" id="acercaDe" style="text-decoration:none">Acerca de</a>
         <a href="" class="optionMenu" id="perfil" style="text-decoration:none">Perfil</a>
         <a href="" class="optionMenu" id="cerrarSesion" style="text-decoration:none">Cerrar sesi\xF3n</a>`;
