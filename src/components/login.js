@@ -7,7 +7,7 @@ export const Login = (onNavigate) => {
   document.body.style.backgroundImage = 'none';
   document.body.style.backgroundColor = '#ffffff';
   const header = document.getElementById('header');
-  header.style.backgroundImage = 'url("Images/header.jpg")';
+  header.style.backgroundImage = 'url("header.jpg")';
   const loginDiv = document.createElement('div');
   loginDiv.setAttribute('class', 'loginDiv');
   const menu = document.createElement('div');
@@ -23,7 +23,7 @@ export const Login = (onNavigate) => {
   buttonMenu.setAttribute('class', 'buttonMenu');
   buttonMenu.setAttribute('id', 'buttonMenu');
   buttonMenu.innerHTML = `
-  <img src="Images/menu.png" alt="buttonMenu">`;
+  <img src="menu.png" alt="buttonMenu">`;
   const menuOptionsDiv = document.createElement('div');
   menuOptionsDiv.setAttribute('class', 'menuOptionsDiv');
   menuOptionsDiv.setAttribute('id', 'menuOptionsDiv');
@@ -42,7 +42,7 @@ export const Login = (onNavigate) => {
 
   // FUNCIONALIDAD MENU
   menuOptionsDiv.innerHTML = `
-        <button class="close" id="close"><img src="Images/9.png" alt="buttonMenu"></button>
+        <button class="close" id="close"><img src="9.png" alt="buttonMenu"></button>
         <a href="" class="optionMenu" id="acercaDe" style="text-decoration:none">Acerca de</a>
         <a href="" class="optionMenu" id="perfil" style="text-decoration:none">Perfil</a>
         <a href="" class="optionMenu" id="cerrarSesion" style="text-decoration:none">Cerrar sesión</a>`;

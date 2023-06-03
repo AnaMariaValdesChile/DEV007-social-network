@@ -3,7 +3,7 @@ import { createUser, savedUser, updateName } from '../firebase/index.js';
 
 export const Register = (onNavigate) => {
   // CREACIÓN DE INTERFAZ
-  document.body.style.backgroundImage = 'url(Images/fondoRegister.png)';
+  document.body.style.backgroundImage = 'url(fondoRegister.png)';
   const header = document.getElementById('header');
   header.style.backgroundImage = 'none';
   const registerDiv = document.createElement('div');
@@ -19,8 +19,8 @@ export const Register = (onNavigate) => {
     <input type="email" class="inputRegister" id="inputMailRegister" placeholder="Correo electrónico">
     <label class="labelRegister">Contraseña:</label>
     <input type="password" class="inputRegister" id="inputPasswordRegister" placeholder="*******************">
-    <img src="Images/12.png" class="hidePassword">
-    <img src="Images/13.png" class="showPassword">
+    <img src="12.png" class="hidePassword">
+    <img src="13.png" class="showPassword">
     <label class="labelErrors" id="labelErrors"></label>
     </div>
     <br>`;

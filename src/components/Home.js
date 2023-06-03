@@ -4,7 +4,7 @@ import { signIn, loginWithGoogle } from '../firebase/index.js';
 
 export const Home = (onNavigate) => {
   // CREACIÓN DE INTERFAZ
-  document.body.style.backgroundImage = 'url(Images/fongoHome.png)';
+  document.body.style.backgroundImage = 'url(fongoHome.png)';
   const homeDiv = document.createElement('div');
   const header = document.getElementById('header');
   header.style.backgroundImage = 'none';
@@ -29,10 +29,10 @@ export const Home = (onNavigate) => {
   inputPassword.placeholder = '************';
   inputPassword.id = 'inputPassword';
   const hidePassword = document.createElement('img');
-  hidePassword.src = 'Images/12.png';
+  hidePassword.src = '12.png';
   hidePassword.setAttribute('class', 'hidePasswords');
   const showPassword = document.createElement('img');
-  showPassword.src = 'Images/13.png';
+  showPassword.src = '13.png';
   showPassword.setAttribute('class', 'showPasswords');
   const labelErrors = document.createElement('label');
   labelErrors.id = 'labelErrors';
@@ -47,10 +47,10 @@ export const Home = (onNavigate) => {
   const socialNetworksDiv = document.createElement('div');
   socialNetworksDiv.id = 'socialNetworksDiv';
   const gmail = document.createElement('img');
-  gmail.src = 'Images/8.png';
+  gmail.src = '8.png';
   gmail.setAttribute('class', 'gmail');
   const facebook = document.createElement('img');
-  facebook.src = 'Images/7.png';
+  facebook.src = '7.png';
   facebook.setAttribute('class', 'fb');
   const buttonRegister = document.createElement('button');
   buttonRegister.id = 'buttonRegisterHome';
