@@ -1,0 +1,656 @@
+/*---------------------------------------------------FORMATOS GENERALES----------------------------------------------*/
+html {
+    box-sizing: border-box;
+    max-width: 100%;
+    font-family: "Open Sans", sans-serif;
+}
+
+button{
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-size: cover; /*la imagen cubre la pantalla*/
+    background-position: center center; /*centra la imagen vertila y horizontalmente*/
+    background-attachment: fixed; /*se fija la imagen para que la altura de la imagen no supera el contenido*/
+    margin: 0;
+}
+
+.root{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    cursor: pointer;
+}
+
+/*---------------------------------------------------MEDIAS QUERIES----------------------------------------------*/
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    /*--GENERALES--*/
+    header img {
+        height: 10em !important;
+        margin-left: 15px !important;
+        margin-top: 15px !important;
+        margin-bottom: 35px !important;
+    }
+    .labelErrors{
+        font-size: 1.3em !important;
+    }
+    /*--HOME--*/
+    #homeTitle {
+        font-size: 2.5em !important;
+    }
+    .lineHome{
+        width: 19em !important;
+    }
+    #iniciarSesionDiv2 input{
+        font-size: 1.3em !important;
+    }
+    #iniciarSesionDiv2 p{
+        font-size: 1.5em !important;
+    }
+    #buttonLogin{
+        font-size: 1.5em !important;
+    }
+    #buttonRegisterHome{
+        font-size: 1.5em !important;
+        margin-top: 2em !important;
+        margin-bottom: 2em !important;
+    }
+    .ingresarConlabel{
+        font-size: 1.3em !important;
+    }
+    #socialNetworksDiv {
+        margin-top: 2em !important;
+    }
+    /*--REGISTER--*/
+    .registerContainer{
+        margin-top: 15px !important;
+    }
+    .registerTitle{
+        font-size: 2.5em !important;
+    }
+    .line{
+        width: 19em !important;
+    }
+    .labelRegister{
+        font-size: 1.5em !important; 
+    }
+    .inputRegister{
+        font-size: 1.3em !important;
+    }
+    .buttonRegister{
+        font-size: 1.5em !important;
+    }
+    .buttonBackHomeRegister{
+        font-size: 1.5em !important;
+    }
+    /*--LOGIN--*/
+}
+
+@media screen and (min-width: 1000px) {
+    /*--GENERALES--*/
+    body{
+        background-position-x: 270px !important;
+    }
+    header img {
+        height: 7em !important;
+        margin-left: 15px !important;
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+        z-index: 1;
+    }
+    /*--HOME--*/
+    #homeDiv {
+        width: 50% !important;
+        margin-left: -50% !important;
+        background-color: #ffffff !important;
+        position: fixed !important;
+        margin-top: -211px !important;
+        padding-top: 200px !important;
+        padding-bottom: 1000px !important;
+    }
+    #iniciarSesionDiv2{
+        background-color: rgb(209 209 209 / 70%) !important;
+        margin: 20px !important;
+    }
+    #buttonLogin {
+        margin-top: 0px !important;
+    }
+    #buttonRegisterHome {
+        margin-bottom: 0em !important;
+    }
+    #socialNetworksDiv {
+        margin-top: 0px !important;
+    }
+    /*--REGISTER--*/
+    .registerContainer{
+        width: 50% !important;
+        margin-left: -50% !important;
+        background-color: #ffffff !important;
+        position: fixed !important;
+        margin-top: -211px !important;
+        padding-top: 200px !important;
+        padding-bottom: 1000px !important;
+    }
+    .containerFormRegister{
+        background-color: rgb(209 209 209 / 70%) !important;
+        margin: 20px !important;
+    }
+    .buttonRegister{
+        margin: 0px !important;
+    }
+    /*--LOGIN--*/
+    
+}
+
+@media screen and (min-width: 650px) {
+    /*--GENERALES--*/
+    /*--HOME--*/
+    /*--REGISTER--*/
+    /*--LOGIN--*/
+}
+
+/*---------------------------------------------------FORMATO HEADER----------------------------------------------*/
+header {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position-y: -509px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header img {
+    height: 7em;
+    margin-left: 8px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+/*--------------------------HOME------------------------*/
+#homeDiv{
+    width: 75%;
+}
+
+#iniciarSesionDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent ;
+    width: -webkit-fill-available;
+}
+
+#iniciarSesionDiv2 {
+    background-color: rgba(255, 255, 255, 0.70);
+    display: flex;
+    flex-direction: column; 
+    padding: 1em;
+    padding-bottom: 1em;
+    border-radius: 20px;
+    width: -webkit-fill-available;
+    gap: 10px;
+}
+
+#homeTitle {
+    font-size: 2em;
+    margin: 0;
+    font-weight: bolder;
+}
+
+.lineHome {
+    background-color: black;
+    width: 15.5em;
+    height: .3em;
+    margin-top: -9px;
+}
+
+#iniciarSesionDiv2 input {
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 2em;
+    width: -webkit-fill-available;
+}
+
+#iniciarSesionDiv2 p {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.hidePassword{
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.showPassword{
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10px;
+}
+
+#buttonLogin {
+    width: 9.5em;
+    height: 2.2em;
+    background-color: rgba(242, 102, 171, 1);
+    border-radius: 20px;
+    border-color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 2em;
+    margin-bottom: 0;
+    align-self: center;
+}
+
+#buttonRegisterHome {
+    width: 9.5em;
+    height: 2.2em;
+    background-color: rgba(255, 197, 25, 1);
+    border-radius: 20px;
+    border-color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: .8em;
+    align-self: center;
+}
+
+#ingresarConDiv {
+    font-weight:bolder;
+    font-size: 1.3em;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10%;
+    padding: 1.5%;
+}
+
+.ingresarConlabel{
+    font-size: 1em;
+    margin: 2px;
+}
+
+#socialNetworksDiv {
+    margin-top: 15px;
+    width: 12em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gmail{
+    width: 5.2em;
+    height: 4em;
+    cursor: pointer;
+}
+
+.fb{
+    width: 5em;
+    height: 5.1em;
+    cursor: pointer;
+}
+
+/*--------------------------REGISTER------------------------*/
+.registerContainer{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.containerFormRegister{
+    background-color: rgba(255, 255, 255, 0.70);
+    display: flex;
+    flex-direction: column; 
+    padding: 1em;
+    padding-bottom: 1em;
+    border-radius: 20px;
+    width: -webkit-fill-available;
+    gap: 15px;
+}
+
+.registerTitle{
+    font-size: 2em;
+    margin: 0;
+}
+
+.line {
+    background-color: black;
+    width: 15em;
+    height: .3em;
+}
+
+.labelRegister{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.inputRegister{
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 2em;
+}
+
+.passwordDiv{
+    width: -webkit-fill-available;
+    background-color: rgba(44, 211, 225, 1);
+    display: flex;
+    justify-content: space-between;
+}
+
+#inputPasswordRegister{
+    width: 12.5em;
+}
+
+.hidePassword{
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.showPassword{
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.labelErrors{
+    color: red;
+    font-size: 1em;
+    font-weight: bolder;
+    align-self: center;
+    text-align: center;
+}
+
+.buttonRegister{
+    background-color: rgba(242, 102, 171, 1);
+    border-radius: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-color: white;
+    width: 9.5em;
+    height: 2.2em;
+    margin: 1em;
+    align-self: center;
+}
+.buttonBackHomeRegister{
+    background-color: rgba(255, 197, 25, 1);
+    border-radius: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-color: #ffffff;
+    width: 9.5em;
+    height: 2.2em;
+    margin: 1em;
+    align-self: center;
+}
+
+/*---------------------------------------------------FORMATO LOGIN----------------------------------------------*/
+.loginDiv{
+    width: 90%;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.onlyMenu{
+    width: max-content;
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.buttonMenu{
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    width: 4em;
+    height: 4.1em;
+    border-radius: 50%;
+    padding: 0;
+    margin-bottom: 4px;
+    margin-right: 4px;
+}
+
+.buttonMenu img{
+    width: 4em;
+    height: 4em;
+    border: solid rgba(164, 89, 209, 1);
+    border-radius: 50%;
+}
+
+.buttonMenu img:hover{
+    cursor: pointer;
+}
+
+.close{
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    align-self: center;
+    border-radius: 50%;
+    margin-top: -21px;
+    position: fixed;
+    margin-right: 148px;
+}
+
+.close img{
+    margin: 0;
+    margin-left: 0;
+    width: 2em;
+    height: 2em;
+    border: solid 1px rgba(164, 89, 209, 1);
+    border-radius: 50%;
+}
+
+.close img:hover{
+    cursor: pointer;
+}
+
+.menuOptionsDiv{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: solid rgba(164, 89, 209, 1);
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 1.2em;
+    height: max-content;
+    width: max-content;
+    position: fixed;
+    margin-top: 58px;
+}
+
+.menuOptionsDiv a:hover{
+    background-color: rgba(242, 102, 171, 0.47);
+    cursor: pointer;
+}
+
+.optionMenu{
+    color: black;
+}
+
+.loginDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.labelLogin{
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.inputLogin{
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 4em;
+    width: -webkit-fill-available;
+    margin-top: .5em;
+    padding-left: 15px;
+    border-radius: 20px;
+    align-self: center;
+}
+
+.buttonPublicar{
+    background-color: rgba(255, 197, 25, 1);
+    border-radius: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-color: #ffffff;
+    width: 7.5em;
+    height: 2.2em;
+    align-self: self-end;
+    margin-right: 10px;
+}
+ 
+.divModal{
+    border-radius: 20px;
+    border: solid rgba(164, 89, 209, 1);
+    height: max-content;
+    align-self: center;
+    width: 70%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.divModal::backdrop{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.labelModal{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.inputModalPost{
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 4em;
+    width: -webkit-fill-available;
+    margin-top: .5em;
+    padding-left: 15px;
+    border-radius: 20px;
+    align-self: center;
+}
+
+.inputModal{
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 4em;
+    width: -webkit-fill-available;
+    margin-top: .5em;
+    padding-left: 15px;
+    border-radius: 20px;
+    align-self: center;
+}
+
+#closeModal{
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border-radius: 50%;
+    margin-top: -25px;
+    position: fixed;
+    margin-left: -27px;
+}
+
+.closeModal img{
+    margin: 0;
+    margin-left: 0;
+    width: 2em;
+    height: 2em;
+    border: solid 1px rgba(164, 89, 209, 1);
+    border-radius: 50%;
+}
+
+.buttonModalImg{
+    background-color: rgba(255, 197, 25, 1);
+    border-radius: 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border-color: #ffffff;
+    width: 10.5em;
+    height: 2.2em;
+    align-self: self-end;
+    margin-right: 10px;
+}
+
+.buttonModalPublish{
+    background-color: rgba(242, 102, 171, 1);
+    border-radius: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-color: white;
+    width: 9.5em;
+    height: 2.2em;
+    margin: 1em;
+    align-self: center;
+}
+
+.containerPublications{
+    text-align: center;
+    border-radius: 20px;
+    border: solid rgba(164, 89, 209, 1);
+    height: 10em;
+    font-family: 'Glacial Indifference', sans-serif;
+    align-self: center;
+    width: -webkit-fill-available;
+}
+
+/*---------------------------------------------------FORMATO FOOTER----------------------------------------------*/
+footer {
+    position: fixed; /*que la posicion sea fija independiente del contenido*/
+    left:0px; /* que a la izquierda no tenga margen o padding??*/
+    bottom:0px; /* que abajo no tenga margen o padding??*/
+    width: 100%; /* que su ancho sea el 100% de su contenedor*/
+    background-color: rgba(217, 217, 217, 0.71);
+    text-align: center;
+    
+}
+
+footer p {
+    font-family: 'verdana' ;
+    font-size: smaller;
+}
