@@ -1,6 +1,7 @@
 // import { onNavigate } from '../main';
+
 import {
-  currentUserInfo,
+  currentUserInfo, publicacion, newPublications, deletePublication, editPublication,
 } from '../firebase/index.js';
 import headerImg from '../Images/headers.jpg';
 import menuImg from '../Images/menu.png';
@@ -80,6 +81,7 @@ export const Login = (onNavigate) => {
     () => {
       windowsModal.innerHTML = `
         <button class="closeModal" id="closeModal"><img src="${nueve}" alt="buttonMenu"></button>
+        <form class="formulario">
         <label class="labelModal">Texto:</label>
         <input type="text" class="inputModalPost" placeholder="Escribe aquí">
         <label class="labelModal">Coordenadas:</label>
@@ -88,20 +90,29 @@ export const Login = (onNavigate) => {
           <label class="labelModal">Imagen:</label>
           <input type="file" class="buttonModalImg" id="buttonModalImg"></input>
         </div>
-        <button class="buttonModalPublish" id="buttonModalPublish">Publicar</button>`;
+        <label class="labelErrorsModal" id="labelErrorsModal"></label>
+        <br>
+        <button type="button" class="buttonModalPublish" id="buttonModalPublish">Publicar</button>
+        </form>`;
       windowsModal.showModal();
       windowsModal.style.display = 'block';
       windowsModal.style.display = 'flex';
       const btnClose = loginDiv.querySelector('#divModal').querySelector('#closeModal'); // variable que almacena el boton de cerrar la ventana modal
       const btnPublish = loginDiv.querySelector('#divModal').querySelector('#buttonModalPublish');
 
-      btnPublish.addEventListener('click', () => {
-        const imputModalPost = windowsModal.querySelector('.inputModalPost').value;
-        const coordenadas = windowsModal.querySelector('.inputModal').value;
-        const selecImg = windowsModal.querySelector('.divImgModal').querySelector('#buttonModalImg').value;
-        console.log(imputModalPost);
-        console.log(coordenadas);
-        console.log(selecImg);
+      btnPublish.addEventListener('click', async () => {
+        const inputModalPost = windowsModal.querySelector('.formulario').querySelector('.inputModalPost').value;
+        const coordenadas = windowsModal.querySelector('.formulario').querySelector('.inputModal').value;
+        const selecImg = windowsModal.querySelector('.formulario').querySelector('.divImgModal').querySelector('#buttonModalImg').value;
+        if (inputModalPost && coordenadas) {
+          publicacion(inputModalPost, coordenadas, selecImg);
+          windowsModal.close();
+          windowsModal.style.display = 'none';
+          console.log(inputModalPost, coordenadas, selecImg);
+          // loginDiv.querySelector('.containerPublications').appendChild();
+        } else {
+          windowsModal.querySelector('.formulario').querySelector('#labelErrorsModal').textContent = 'Debe rellenar todos los campos';
+        }
       });
       btnClose.addEventListener('click', () => {
         windowsModal.close();
@@ -109,6 +120,49 @@ export const Login = (onNavigate) => {
       });
     },
   );
+  const containerPublications = loginDiv.querySelector('.containerPublications');
+  console.log(containerPublications);
+  window.addEventListener('DOMContentLoaded', async () => {
+    newPublications((querySnapshot) => {
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const publication = doc.data();
+        html += `
+      <div class="posts"> 
+      <h3>${publication.post}</h3>
+      <h3>${publication.coords}</h3>
+      <button class="btnDelete" data-id="${doc.id}">Eliminar</button>
+      <button class="btnEdit" data-id="${doc.id}">Editar</button>
+      </div>`;
+      });
+      containerPublications.innerHTML = html;
+      const buttonDelete = containerPublications.querySelectorAll('.btnDelete');
+      buttonDelete.forEach((btn) => btn.addEventListener('click', ({ target: { dataset } }) => {
+        deletePublication(dataset.id);
+      }));
+      const buttonEdit = containerPublications.querySelectorAll('.btnEdit');
+
+      buttonEdit.forEach((btn) => btn.addEventListener('click', async ({ target: { dataset } }) => {
+        const doc = await editPublication(dataset.id);
+        const inputEdit = document.createElement('input');
+        const coordsEdit = document.createElement('input');
+        const divEdit = document.createElement('div');
+        const htmlEdit = loginDiv.querySelector('.containerPublications').querySelector('.posts');
+
+        htmlEdit.appendChild(divEdit);
+        divEdit.appendChild(inputEdit);
+        divEdit.appendChild(coordsEdit);
+        if (divEdit.firstChild) {
+          divEdit.removeChild(divEdit.firstChild);
+          divEdit.appendChild(inputEdit);
+          divEdit.appendChild(coordsEdit);
+        }
+        const forEditPublication = doc.data();
+        console.log(forEditPublication);
+      }));
+    });
+  });
+  // const querySnapshot = await allPublication();
 
   return loginDiv;
 };

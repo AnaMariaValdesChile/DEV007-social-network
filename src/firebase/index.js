@@ -1,6 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import {
+  getFirestore, setDoc, doc, collection, addDoc, getDocs, onSnapshot,
+  deleteDoc, getDoc,
+} from 'firebase/firestore';
 import {
   getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
@@ -34,3 +37,15 @@ export const currentUserInfo = () => auth.currentUser;
 // LOGIN CON GOOGLE
 const provider = new GoogleAuthProvider();
 export const loginWithGoogle = () => signInWithPopup(auth, provider);
+
+export const publicacion = (inputModalPost, coordenadas, selecImg) => {
+  addDoc(collection(db, 'publicaciones'), { post: inputModalPost, coords: coordenadas, imagen: selecImg });
+};
+
+export const allPublication = () => getDocs(collection(db, 'publicaciones'));
+
+export const newPublications = (callback) => onSnapshot(collection(db, 'publicaciones'), callback);
+
+export const deletePublication = (id) => deleteDoc(doc(db, 'publicaciones', id));
+
+export const editPublication = (id) => getDoc(doc(db, 'publicaciones', id));
