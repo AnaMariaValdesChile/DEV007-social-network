@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {
   getFirestore, setDoc, doc, collection, addDoc, getDocs, onSnapshot,
-  deleteDoc, getDoc,
+  deleteDoc, getDoc, updateDoc,
 } from 'firebase/firestore';
 import {
   getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
@@ -49,3 +49,5 @@ export const newPublications = (callback) => onSnapshot(collection(db, 'publicac
 export const deletePublication = (id) => deleteDoc(doc(db, 'publicaciones', id));
 
 export const editPublication = (id) => getDoc(doc(db, 'publicaciones', id));
+
+export const upDatePost = (id, changes) => updateDoc(doc(db, 'publicaciones', id), changes);

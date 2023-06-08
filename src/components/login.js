@@ -1,7 +1,7 @@
 // import { onNavigate } from '../main';
 
 import {
-  currentUserInfo, publicacion, newPublications, deletePublication, editPublication,
+  currentUserInfo, publicacion, newPublications, deletePublication, editPublication, upDatePost,
 } from '../firebase/index.js';
 import headerImg from '../Images/headers.jpg';
 import menuImg from '../Images/menu.png';
@@ -121,7 +121,7 @@ export const Login = (onNavigate) => {
     },
   );
   const containerPublications = loginDiv.querySelector('.containerPublications');
-  console.log(containerPublications);
+  // console.log(containerPublications);
   window.addEventListener('DOMContentLoaded', async () => {
     newPublications((querySnapshot) => {
       let html = '';
@@ -141,28 +141,59 @@ export const Login = (onNavigate) => {
         deletePublication(dataset.id);
       }));
       const buttonEdit = containerPublications.querySelectorAll('.btnEdit');
+      let idPublished = '';
 
       buttonEdit.forEach((btn) => btn.addEventListener('click', async ({ target: { dataset } }) => {
         const doc = await editPublication(dataset.id);
-        const inputEdit = document.createElement('input');
-        const coordsEdit = document.createElement('input');
-        const divEdit = document.createElement('div');
-        const htmlEdit = loginDiv.querySelector('.containerPublications').querySelector('.posts');
+        windowsModal.innerHTML = `
+        <button class="closeModal" id="closeModal"><img src="${nueve}" alt="buttonMenu"></button>
+        <form class="formulario">
+        <label class="labelModal">Texto:</label>
+        <input type="text" class="inputModalPostEdit" placeholder="Escribe aquí">
+        <label class="labelModal">Coordenadas:</label>
+        <input type="text" class="inputModalEdit" placeholder="Escribe aquí">
+        <div class="divImgModal"> 
+          <label class="labelModal">Imagen:</label>
+          <input type="file" class="buttonModalImg" id="buttonModalImgEdit"></input>
+        </div>
+        <label class="labelErrorsModal" id="labelErrorsModal"></label>
+        <br>
+        <button type="button" class="buttonModalPublish" id="buttonModalPublishEdit"> Editar Publicacion</button>
+        </form>`;
+        windowsModal.showModal();
+        windowsModal.style.display = 'block';
+        windowsModal.style.display = 'flex';
+        const btnCloseEdit = loginDiv.querySelector('#divModal').querySelector('#closeModal'); // variable que almacena el boton de cerrar la ventana modal
+        const btnPublishEdit = loginDiv.querySelector('#divModal').querySelector('#buttonModalPublishEdit');
 
-        htmlEdit.appendChild(divEdit);
-        divEdit.appendChild(inputEdit);
-        divEdit.appendChild(coordsEdit);
-        if (divEdit.firstChild) {
-          divEdit.removeChild(divEdit.firstChild);
-          divEdit.appendChild(inputEdit);
-          divEdit.appendChild(coordsEdit);
-        }
+        const inputModalPostEdit = windowsModal.querySelector('.formulario').querySelector('.inputModalPostEdit');
+        const coordenadasEdit = windowsModal.querySelector('.formulario').querySelector('.inputModalEdit');
+        const selecImgEdit = windowsModal.querySelector('.formulario').querySelector('.divImgModal').querySelector('#buttonModalImgEdit');
+
         const forEditPublication = doc.data();
-        console.log(forEditPublication);
+        inputModalPostEdit.value = forEditPublication.post;
+        coordenadasEdit.value = forEditPublication.coords;
+        selecImgEdit.value = forEditPublication.imagen;
+        idPublished = doc.id;
+        console.log(idPublished);
+
+        btnPublishEdit.addEventListener('click', () => {
+          const newInputPost = windowsModal.querySelector('.formulario').querySelector('.inputModalPostEdit').value;
+          const newCoords = windowsModal.querySelector('.formulario').querySelector('.inputModalEdit').value;
+          const newImg = windowsModal.querySelector('.formulario').querySelector('.divImgModal').querySelector('#buttonModalImgEdit').value;
+          upDatePost(idPublished, { post: newInputPost, coords: newCoords, imagen: newImg });
+          windowsModal.close();
+          windowsModal.style.display = 'none';
+          console.log(inputModalPostEdit, coordenadasEdit, selecImgEdit);
+        });
+
+        btnCloseEdit.addEventListener('click', () => {
+          windowsModal.close();
+          windowsModal.style.display = 'none';
+        });
       }));
     });
   });
-  // const querySnapshot = await allPublication();
 
   return loginDiv;
 };

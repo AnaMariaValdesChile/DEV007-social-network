@@ -638,7 +638,35 @@ header img {
     align-self: center;
     width: -webkit-fill-available;
 }
+/*--------------------------------------------------MODAL EDIT---------------------------------------------*/
 
+.inputModalPostEdit{
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 4em;
+    width: -webkit-fill-available;
+    margin-top: .5em;
+    padding-left: 15px;
+    border-radius: 20px;
+    align-self: center;
+}
+
+.inputModalEdit{
+    background-color: rgba(44, 211, 225, 1);
+    color: rgba(95, 95, 95, 1);
+    font-size: 1.1em;
+    font-family: 'Glacial Indifference', sans-serif;
+    border: none;
+    height: 4em;
+    width: -webkit-fill-available;
+    margin-top: .5em;
+    padding-left: 15px;
+    border-radius: 20px;
+    align-self: center;
+}
 /*---------------------------------------------------FORMATO FOOTER----------------------------------------------*/
 footer {
     position: fixed; /*que la posicion sea fija independiente del contenido*/
