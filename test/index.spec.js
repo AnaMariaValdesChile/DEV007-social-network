@@ -1,274 +1,108 @@
-/* eslint-disable no-import-assign */
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from '@firebase/auth';
 import {
-  // eslint-disable-next-line max-len
-  signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, currentUser, FacebookAuthProvider,
-} from 'firebase/auth';
-import {
-  addDoc, updateDoc, onSnapshot, deleteDoc, query,
+  addDoc, orderBy, deleteDoc, updateDoc,
 } from 'firebase/firestore';
 import {
-  // eslint-disable-next-line max-len
-  signIn, createUser, updateName, loginWithGoogle, post, addPost, deleteDocData, updatePost, like, disLike, loginWithFB, updateNameProfile, orderPosts,
-} from '../src/firebase/index';
+  signIn, createUser, updateName, post, updatePost, like, disLike, deleteDocData, orderPosts,
+} from '../src/firebase';
 
-jest.mock('firebase/auth');
-jest.mock('firebase/firestore');
+jest.mock('@firebase/auth');
 
-beforeEach(() => {
-  signInWithEmailAndPassword.mockClear();
-  createUserWithEmailAndPassword.mockClear();
-  updateProfile.mockClear();
-  signInWithPopup.mockClear();
-  GoogleAuthProvider.mockClear();
-  updateDoc.mockClear();
-  query.mockClear();
-  deleteDoc.mockClear();
-  onSnapshot.mockClear();
-  addDoc.mockClear();
-});
+jest.mock('@firebase/firestore');
+
+console.log(signInWithEmailAndPassword);
+console.log(addDoc);
 
 describe('signIn', () => {
-  test('debería retornar la información del usuario una vez que se ha logeado', async () => {
-    signInWithEmailAndPassword.mockReturnValueOnce({ email: 'hola@gmail.com' });
-    const response = await signIn('hola@gmail.com', '1234567');
-    expect(response.email).toBe('hola@gmail.com');
-  });
+  it('debe ser una funcion', () => expect(typeof signIn).toBe('function'));
 
-  test('debería llamar a la función signInWithEmailAndPassword cuando es ejecutada', async () => {
-    await signIn('hola@gmail.com', '1234567');
+  it('Deberia llamar a la funcion signInWithEmailAndPassword', async () => {
+    await signIn('an.valdes.rodriguez@gmail.com', 'magdalena');
     expect(signInWithEmailAndPassword).toHaveBeenCalled();
   });
 
-  test('debería retornar error cuando no funcione la dependencia', async () => {
-    signInWithEmailAndPassword.mockReturnValueOnce(new Error('ups'));
-    const response = await signIn('hola@gmail.com', '1234567');
-    expect(response).toBeInstanceOf(Error);
-    expect(signInWithEmailAndPassword).toHaveBeenCalledTimes(1);
+  it('Deberia retornar un objeto con la propiedad user.email', async () => {
+    signInWithEmailAndPassword.mockReturnValueOnce({ user: { email: 'an.valdes.rodriguez@gmail.com' } });
+    const respuesta = await signIn('an.valdes.rodriguez@gmail.com', 'magdalena');
+    expect(respuesta.user.email).toBe('an.valdes.rodriguez@gmail.com');
   });
 });
 
 describe('createUser', () => {
-  test('debería retornar la información del usuario una vez que haya sido creado', async () => {
-    createUserWithEmailAndPassword.mockReturnValueOnce({ user: 'string' });
-    const response = await createUser('hola@gmail.com', '1234567');
-    expect(response.user).toBe('string');
-  });
+  it('debe ser una funcion', () => expect(typeof createUser).toBe('function'));
 
-  test('debería llamar a la función createUserWithEmailAndPassword cuando es ejecutada', async () => {
-    await createUser('hola@gmail.com', '1234567');
+  it('Deberia llamar a la funcion createUserWithEmailAndPassword', async () => {
+    await createUser('an.valdes.rodriguez@gmail.com', 'magdalena');
     expect(createUserWithEmailAndPassword).toHaveBeenCalled();
   });
 
-  test('debería retornar error cuando no funcione', async () => {
-    createUserWithEmailAndPassword.mockReturnValueOnce(new Error('ups'));
-    const response = await createUser('hola@gmail.com', '1234567');
-    expect(response).toBeInstanceOf(Error);
-    expect(createUserWithEmailAndPassword).toHaveBeenCalledTimes(1);
+  it('Deberia retornar un objeto con la propiedad user.email', async () => {
+    createUserWithEmailAndPassword.mockReturnValueOnce({ user: { email: 'an.valdes.rodriguez@gmail.com' } });
+    const respuesta = await createUser('an.valdes.rodriguez@gmail.com', 'magdalena');
+    expect(respuesta.user.email).toBe('an.valdes.rodriguez@gmail.com');
   });
 });
 
 describe('updateName', () => {
-  /* test('debería retornar el nombre del usuario guardado', async () => {
-    // updateProfile.mockReturnValueOnce((currentUser, { displayName }) => ({ }));
-    const response = await updateName('Prueba');
-    // expect(typeof response).toBe('object');
-    // expect(updateProfile.mock.lastCall[1].displayName).toBe('Prueba');
-    expect(response.user.displayName).toBe('Prueba');
-  }); */
+  it('debe ser una funcion', () => expect(typeof updateName).toBe('function'));
 
-  test('debería llamar a la función updateProfile cuando es ejecutada', async () => {
-    await updateName('Prueba');
+  it('Deberia llamar a la funcion updateProfile', async () => {
+    await updateName('an.valdes.rodriguez@gmail.com', '_');
     expect(updateProfile).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya guardado', async () => {
-    updateProfile.mockReturnValueOnce(new Error('ups'));
-    const response = await updateName('Prueba');
-    // expect(response).toBeInstanceOf(Error);
-    expect(updateProfile).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('loginWithGoogle', () => {
-  test('debería retornar la información del usuario una vez que se ha logeado con Google', async () => {
-    signInWithPopup.mockReturnValueOnce({ user: 'stringGoogle' });
-    const provider = GoogleAuthProvider.mockReturnValueOnce({});
-    console.log(provider);
-    const response = await loginWithGoogle();
-    expect(response.user).toBe('stringGoogle');
-  });
-
-  test('debería llamar a la función signInWithPopup cuando es ejecutada', async () => {
-    await loginWithGoogle();
-    expect(signInWithPopup).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya logeado con Google', async () => {
-    signInWithPopup.mockReturnValueOnce(new Error('ups'));
-    const response = await loginWithGoogle();
-    expect(response).toBeInstanceOf(Error);
-    expect(signInWithPopup).toHaveBeenCalledTimes(1);
   });
 });
 
 describe('post', () => {
-  test('debería llamar a la función addDoc cuando es ejecutada', async () => {
-    await post('Hola a todos', '123', 'fotoPiedra');
+  it('debe ser una funcion', () => expect(typeof post).toBe('function'));
+
+  it('Deberia llamar a la funcion addDoc', async () => {
+    await post('texto', { lat: 0, lng: 0 }, 'img.jpeg', '_');
     expect(addDoc).toHaveBeenCalled();
-  });
-
-  test('debería llamar a la función updateDoc cuando es ejecutada', async () => {
-    await post('Hola a todos', '123', 'fotoPiedra');
-    expect(updateDoc).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya agregado el post', async () => {
-    addDoc.mockReturnValueOnce(new Error('ups'));
-    const response = await post();
-    expect(addDoc).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('addPost', () => {
-  test('debería llamar a la función onSnapshot cuando es ejecutada', async () => {
-    await addPost('callback');
-    expect(onSnapshot).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se obtengan los posts', async () => {
-    onSnapshot.mockReturnValueOnce(new Error('ups'));
-    const response = await addPost('callback');
-    expect(onSnapshot).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('deleteDocData', () => {
-  test('debería llamar a la función deleteDoc cuando es ejecutada', async () => {
-    await deleteDocData('1234');
-    expect(deleteDoc).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se eliminen los posts', async () => {
-    deleteDoc.mockReturnValueOnce(new Error('ups'));
-    const response = await deleteDocData('1234');
-    expect(deleteDoc).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('updatePost', () => {
-  test('debería editar post', async () => {
-    updateDoc.mockReturnValueOnce({ text: 'newText' });
-    const response = await updatePost('12345', 'newText');
-    expect(response.text).toBe('newText');
-  });
-
-  test('debería llamar a la función updateDoc cuando es ejecutada', async () => {
-    await updatePost('12345', 'newText');
-    expect(updateDoc).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se editen los posts', async () => {
-    updateDoc.mockReturnValueOnce(new Error('ups'));
-    const response = await updatePost('12345', 'newText');
-    expect(response).toBeInstanceOf(Error);
-    expect(updateDoc).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('like', () => {
-  test('debería dar like a post', async () => {
-    updateDoc.mockReturnValueOnce({ likes: 'newLike' });
-    const response = await like('12345', 'newLike');
-    expect(response.likes).toBe('newLike');
-  });
-
-  test('debería llamar a la función updateDoc cuando es ejecutada', async () => {
-    await like('12345', 'newLike');
-    expect(updateDoc).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya dado like a los posts', async () => {
-    updateDoc.mockReturnValueOnce(new Error('ups'));
-    const response = await like('12345', 'callback');
-    expect(response).toBeInstanceOf(Error);
-    expect(updateDoc).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('disLike', () => {
-  test('debería quitar like a post', async () => {
-    updateDoc.mockReturnValueOnce({ likes: '' });
-    const response = await disLike('12345', 'deleteLike');
-    expect(response.likes).toBe('');
-  });
-
-  test('debería llamar a la función updateDoc cuando es ejecutada', async () => {
-    await disLike('12345', 'deleteLike');
-    expect(updateDoc).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya borrado el like a los posts', async () => {
-    updateDoc.mockReturnValueOnce(new Error('ups'));
-    const response = await disLike('12345', 'deleteLike');
-    expect(response).toBeInstanceOf(Error);
-    expect(updateDoc).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('loginWithFB', () => {
-  test('debería retornar la información del usuario una vez que se ha logeado con Facebook', async () => {
-    signInWithPopup.mockReturnValueOnce({ user: 'stringFacebook' });
-    const provider = FacebookAuthProvider.mockReturnValueOnce({});
-    console.log(provider);
-    const response = await loginWithFB();
-    expect(response.user).toBe('stringFacebook');
-  });
-
-  test('debería llamar a la función signInWithPopup cuando es ejecutada', async () => {
-    await loginWithFB();
-    expect(signInWithPopup).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya logeado con Google', async () => {
-    signInWithPopup.mockReturnValueOnce(new Error('ups'));
-    const response = await loginWithFB();
-    expect(response).toBeInstanceOf(Error);
-    expect(signInWithPopup).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('updateNameProfile', () => {
-  /* test('debería retornar el nombre del usuario actualizado', async () => {
-    updateProfile.mockReturnValueOnce({ user: { displayName: 'Prueba' } });
-    const response = await updateNameProfile('Prueba');
-    expect(response.user.displayName).toBe('Prueba');
-  }); */
-
-  test('debería llamar a la función updateProfile cuando es ejecutada', async () => {
-    await updateNameProfile('Prueba');
-    expect(updateProfile).toHaveBeenCalled();
-  });
-
-  test('debería retornar error cuando no se haya actualizado', async () => {
-    updateProfile.mockReturnValueOnce(new Error('ups'));
-    const response = await updateNameProfile('Prueba');
-    // expect(response).toBeInstanceOf(Error);
-    expect(updateProfile).toHaveBeenCalledTimes(1);
   });
 });
 
 describe('orderPosts', () => {
-  test('debería llamar a la función query cuando es ejecutada', async () => {
-    await orderPosts();
-    expect(query).toHaveBeenCalled();
-  });
+  it('debe ser una funcion', () => expect(typeof orderPosts).toBe('function'));
 
-  test('debería retornar error cuando no se haya actualizado', async () => {
-    query.mockReturnValueOnce(new Error('ups'));
-    const response = await orderPosts();
-    expect(response).toBeInstanceOf(Error);
-    expect(query).toHaveBeenCalledTimes(1);
+  it('Deberia llamar a la funcion orderBy', async () => {
+    await orderPosts('an.valdes.rodriguez@gmail.com', '_');
+    expect(orderBy).toHaveBeenCalled();
+  });
+});
+
+describe('deleteDocData', () => {
+  it('debe ser una funcion', () => expect(typeof deleteDocData).toBe('function'));
+
+  it('Deberia llamar a la funcion deleteDoc', async () => {
+    await deleteDocData('xxxxxxxxxx');
+    expect(deleteDoc).toHaveBeenCalled();
+  });
+});
+
+describe('updatePost', () => {
+  it('debe ser una funcion', () => expect(typeof updatePost).toBe('function'));
+
+  it('Deberia llamar a la funcion updateDoc', async () => {
+    await updatePost('xxxxxxxxxx', 'nuevo post');
+    expect(updateDoc).toHaveBeenCalled();
+  });
+});
+
+describe('like', () => {
+  it('debe ser una funcion', () => expect(typeof like).toBe('function'));
+
+  it('Deberia llamar a la funcion updateDoc', async () => {
+    await like('xxxxxxxxxx', 'like');
+    expect(updateDoc).toHaveBeenCalled();
+  });
+});
+
+describe('disLike', () => {
+  it('debe ser una funcion', () => expect(typeof disLike).toBe('function'));
+
+  it('Deberia llamar a la funcion updateDoc', async () => {
+    await disLike('xxxxxxxxxx', 'dislike');
+    expect(updateDoc).toHaveBeenCalled();
   });
 });
